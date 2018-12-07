@@ -9,4 +9,4 @@ Bear market is making me homeless, dumping token on kyber for food is pure joy..
 1. Modify `main.go` in `main function` to tweak token and parameters. It is self-explained, no need docs.
 2. Compile it `go build -v -o dumper`
 3. Run it `./dumper <path to your keystore>`
-4. Jure joy watching it runs
+4. Pure joy watching it runs
