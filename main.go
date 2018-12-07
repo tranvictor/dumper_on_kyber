@@ -61,7 +61,7 @@ func dump(acc *account.Account, amount float64, token string, tokenSymbol string
       amountBig = big.NewInt(0).Set(currentBalance)
     }
     targetBalance := big.NewInt(0).Sub(currentBalance, amountBig)
-    fmt.Printf("Target KNC balance: %f\n", ethutils.BigToFloat(targetBalance, decimal))
+    fmt.Printf("Target %s balance: %f\n", tokenSymbol, ethutils.BigToFloat(targetBalance, decimal))
     // loop to sell
     maxBig := ethutils.FloatToBigInt(max, decimal)
     for currentBalance.Cmp(targetBalance) > 0 {
