@@ -76,6 +76,7 @@ func dump(acc *account.Account, amount float64, token string, tokenSymbol string
 			fmt.Printf("Current %s balance: %f\n", tokenSymbol, ethutils.BigToFloat(currentBalance, decimal))
 			fmt.Printf("Going to dump %f %s\n", ethutils.BigToFloat(tradeAmount, decimal), tokenSymbol)
 			tx, broadcasted, errors := acc.CallContract(
+				150000,
 				0,
 				"0x818E6FECD516Ecc3849DAf6845e3EC868087B755",
 				"swapTokenToEther",
@@ -107,30 +108,38 @@ func dump(acc *account.Account, amount float64, token string, tokenSymbol string
 
 func main() {
 	rand.Seed(time.Now().UTC().UnixNano())
-	kncAcc := unlockAccount(os.Args[1])
-	waitForKNC := dump(
-		kncAcc,
-		30, // dumping 30 knc
-		"0xdd974d5c2e2928dea5f71b9825b8b646686bd200",
-		"KNC",
-		5, 10, // 5 - 10 KNC at a time
-		10, 30, // each 10 to 30 second
+	// kncAcc := unlockAccount(os.Args[1])
+	// waitForKNC := dump(
+	// 	kncAcc,
+	// 	30, // dumping 30 knc
+	// 	"0xdd974d5c2e2928dea5f71b9825b8b646686bd200",
+	// 	"KNC",
+	// 	5, 10, // 5 - 10 KNC at a time
+	// 	10, 30, // each 10 to 30 second
+	// )
+	// <-waitForKNC
+	waxAcc := unlockAccount(os.Args[1])
+	waitForWAX := dump(
+		waxAcc,
+		300,
+		"0x39Bb259F66E1C59d5ABEF88375979b4D20D98022", // wax
+		"WAX",
+		50, 100,
+		20, 40,
+		// 1500, 3800,
+		// 3, 11,
 	)
-	<-waitForKNC
-	// waxAcc := unlockAccount(os.Args[1])
-	// waitForWAX := dump(
-	//   waxAcc,
-	//   "0x39Bb259F66E1C59d5ABEF88375979b4D20D98022",
-	//   1500, 3800,
-	//   3, 11,
-	// )
-	// gtoAcc := unlockAccount(os.Args[2])
-	// waitForGTO := dump(
-	//   gtoAcc,
-	//   "0xC5bBaE50781Be1669306b9e001EFF57a2957b09d",
-	//   2500, 10900,
-	//   5, 15,
-	// )
-	// <- waitForWAX
-	// <- waitForGTO
+	gtoAcc := unlockAccount(os.Args[2])
+	waitForGTO := dump(
+		gtoAcc,
+		300,
+		"0xC5bBaE50781Be1669306b9e001EFF57a2957b09d", // gto
+		"GTO",
+		50, 100,
+		10, 50,
+		// 2500, 10900,
+		// 5, 15,
+	)
+	<-waitForWAX
+	<-waitForGTO
 }
