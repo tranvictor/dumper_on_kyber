@@ -118,28 +118,29 @@ func main() {
 	// 	10, 30, // each 10 to 30 second
 	// )
 	// <-waitForKNC
-	waxAcc := unlockAccount(os.Args[1])
-	waitForWAX := dump(
-		waxAcc,
-		300,
-		"0x39Bb259F66E1C59d5ABEF88375979b4D20D98022", // wax
-		"WAX",
-		50, 100,
-		20, 40,
-		// 1500, 3800,
-		// 3, 11,
-	)
-	gtoAcc := unlockAccount(os.Args[2])
+	// waxAcc := unlockAccount(os.Args[1])
+	// waitForWAX := dump(
+	// 	waxAcc,
+	// 	300,
+	// 	"0x39Bb259F66E1C59d5ABEF88375979b4D20D98022", // wax
+	// 	"WAX",
+	// 	50, 100,
+	// 	20, 40,
+	// 	// 1500, 3800,
+	// 	// 3, 11,
+	// )
+	gtoAcc := unlockAccount(os.Args[1])
 	waitForGTO := dump(
 		gtoAcc,
-		300,
+		// 300,
+		497256.3421,
 		"0xC5bBaE50781Be1669306b9e001EFF57a2957b09d", // gto
 		"GTO",
-		50, 100,
-		10, 50,
-		// 2500, 10900,
-		// 5, 15,
+		// 50, 100,
+		// 10, 50,
+		2500, 10900,
+		5*60, 15*60,
 	)
-	<-waitForWAX
+	// <-waitForWAX
 	<-waitForGTO
 }
